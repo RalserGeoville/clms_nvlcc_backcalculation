@@ -1,0 +1,14 @@
+name: nvlcc-backcalculation
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - gdal
+  - numpy
+  - pyyaml
+  - matplotlib
+  - pillow
+  - folium
+  - ipywidgets
+  - ipykernel
+  - jupyterlab

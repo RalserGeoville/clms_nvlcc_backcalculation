@@ -1,0 +1,18 @@
+Innsbruck:
+  status_res: 10
+  change_res: 20
+  target_srid: 3857
+  xmax: 1276600
+  xmin: 1259500
+  ymax: 5989400
+  ymin: 5982900
+  zoom: 10
+North-Italy:
+  status_res: 100
+  change_res: 100
+  target_srid: 3857
+  xmax: 1100700
+  xmin: 917600
+  ymax: 5748800
+  ymin: 5662500
+  zoom: 6
