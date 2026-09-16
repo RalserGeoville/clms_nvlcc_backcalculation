@@ -9,3 +9,7 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Claude Code
+CLAUDE.md
+.claude/settings.local.json

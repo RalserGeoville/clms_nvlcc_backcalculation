@@ -60,9 +60,14 @@ jupyter lab
 
 ## Repository Structure
 
-- `change_backcalculation.ipynb` – main notebook.
-- `helpers/raster_utils.py` – raster I/O, resampling, and image-conversion helper functions
-  used by the notebook.
+- `change_backcalculation.ipynb` – main notebook. Focuses on the idea: site selection, the
+  two reconstruction methods, and their comparison; loading, plotting, and widget boilerplate
+  live in `helpers/`.
+- `helpers/raster_utils.py` – raster I/O, resampling, and image-conversion functions.
+- `helpers/data_loading.py` – site definitions and status/change raster loading.
+- `helpers/analysis.py` – invalid-pixel summary used to compare the two methods.
+- `helpers/plotting.py` – all matplotlib/folium map and chart builders.
+- `helpers/ui.py` – dropdown-selector widget factory.
 - `data/` – small demo dataset: cropped IMD/IMDC GeoTIFFs for two study areas (Innsbruck,
   North Italy) plus `site_definition.yaml`, which defines their extents and resolutions.
 - `environment.yml` – conda environment definition (used both locally and by Binder).

@@ -2,12 +2,16 @@
 
 import io
 import base64
+import warnings
 
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
 from osgeo import gdal, osr
 from PIL import Image
+
+gdal.UseExceptions()
+warnings.filterwarnings('ignore', category=FutureWarning)
 
 
 def load_array(path):
