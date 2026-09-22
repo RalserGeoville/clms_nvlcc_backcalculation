@@ -154,9 +154,9 @@ def plot_method_comparison(orig, sub, ind, invalid_info, year):
     plt.show()
 
 
-def plot_summary_charts(invalid, years, status, sub_results, ind_results, site_name):
-    """Bar chart of invalid-pixel counts per year, plus a distribution comparison for the worst year."""
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+def plot_invalid_pixel_counts(invalid, years, site_name):
+    """Bar chart of invalid-pixel counts per reconstructed year (backward subtraction)."""
+    fig, ax1 = plt.subplots(figsize=(8, 5))
 
     inv_counts = [invalid[y][0] for y in years]
     pct_labels = [f'{invalid[y][2]:.1f}%' for y in years]
@@ -173,18 +173,25 @@ def plot_summary_charts(invalid, years, status, sub_results, ind_results, site_n
     ax1.set_ylim(0, max(max(inv_counts) * 1.20, 1))
 
     fig.text(
-        0.5, -0.03,
+        0.5, -0.05,
         f'Pixel counts refer to the {site_name} study-area tile only (the extent shown in the maps above), '
         'not the full product coverage.',
         ha='center', fontsize=9, style='italic',
     )
 
-    worst = max(years, key=lambda y: invalid[y][0])
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_year_distribution(status, sub_results, ind_results, year):
+    """Pixel-value distribution comparison (original / subtraction / binary mask substitution) for one year."""
+    fig, ax2 = plt.subplots(figsize=(8, 5))
+
     bins = np.linspace(-30, 110, 70)
     for arr, label, color in [
-        (status[worst][0], f'Original IMD 20{worst}', '#888'),
-        (sub_results[worst], 'Subtraction', '#2f3fd4'),
-        (ind_results[worst], 'Binary mask substitution', '#27ae60'),
+        (status[year][0], f'Original IMD 20{year}', '#888'),
+        (sub_results[year], 'Subtraction', '#2f3fd4'),
+        (ind_results[year], 'Binary mask substitution', '#27ae60'),
     ]:
         flat = arr.flatten()
         flat = flat[~np.isnan(flat)]
@@ -194,10 +201,10 @@ def plot_summary_charts(invalid, years, status, sub_results, ind_results, site_n
     ax2.axvline(100, color='black', lw=1.5, ls=':', alpha=0.8)
     ax2.set_xlabel('Imperviousness value (%)')
     ax2.set_ylabel('Pixel count')
-    ax2.set_title(f'Pixel Distributions — 20{worst} (most affected year)', fontsize=12)
+    ax2.set_title(f'Pixel Distributions — 20{year}', fontsize=12)
 
     # Scale to the interior (1-99 %) distribution so the 0 %/100 % spikes don't dominate
-    interior = status[worst][0]
+    interior = status[year][0]
     interior = interior[~np.isnan(interior)]
     interior = interior[(interior > 0) & (interior < 100)]
     ref_counts, _ = np.histogram(interior, bins=48, range=(1, 99))

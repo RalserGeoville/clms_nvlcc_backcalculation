@@ -49,7 +49,7 @@ def load_site_layers(site_name, cfg, years, pairs):
     cross_res = status_res != change_res
     print(f'Loaded {len(status)} status layers and {len(change)} change layers for {site_name}.')
     if cross_res:
-        print(f'  Cross-resolution site: {change_res} m change mask will be resampled '
+        print(f'  Cross-resolution site: {change_res} m IMDC-derived change mask will be resampled '
               f'to the {status_res} m status grid.')
 
     return {'status': status, 'change': change, 'ref_ds': ref_ds, 'cross_res': cross_res}
